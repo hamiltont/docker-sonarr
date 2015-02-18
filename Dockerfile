@@ -28,7 +28,6 @@ ADD develop/sonarr-update.sh /sonarr-update.sh
 RUN chmod 755 /sonarr-update.sh \
   && chown nobody:users /sonarr-update.sh
 
-USER nobody
 WORKDIR /opt/NzbDrone
 
 ENTRYPOINT ["/start.sh"]
