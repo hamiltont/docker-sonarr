@@ -9,7 +9,10 @@ function handle_signal {
 trap "handle_signal" SIGINT SIGTERM SIGHUP
 
 echo "Changing ownership of /volumes to nobody"
-chown -R nobody:nogroup /volumes
+chown -R nobody:nogroup /volumes/config
+chown -R nobody:nogroup /volumes/completed
+chown -R nobody:nogroup /volumes/media
+
 echo "starting sonarr as nobody"
 chsh -s /bin/sh nobody
 su - nobody -c 'mono /opt/NzbDrone/NzbDrone.exe --no-browser -data=/volumes/config/sonarr' & wait
