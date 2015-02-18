@@ -6,7 +6,7 @@ Minor modifications from tuxeh/sonarr
 
 Currently all tags are on master branch
 
-- hamiltont/sonarr:2.0.0.2850
+- hamiltont/sonarr:2.0.0.2850 - 2015-02-07
 
 ### Ports
 - **TCP 8989** - Web Interface
