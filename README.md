@@ -1,8 +1,12 @@
-# Docker Sonarr (previously NzbDrone)
+# Docker Sonarr
+
+Minor modifications from tuxeh/sonarr
 
 ### Tags
-- tuxeh/sonarr:**latest** - Installs from Sonarr master repository
-- tuxeh/sonarr:**develop** - Installs from Sonarr develop repository
+
+Currently all tags are on master branch
+
+- hamiltont/sonarr:2.0.0.2850
 
 ### Ports
 - **TCP 8989** - Web Interface
