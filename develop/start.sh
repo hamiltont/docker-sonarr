@@ -17,12 +17,7 @@ trap "handle_signal" SIGINT SIGTERM SIGHUP
 # In some cases we will create temporary groups with
 # the necessary gids so that we can add nobody to them
 
-echo "Getting group ID's of /volumes"
-MEDIA_ID=$(stat -c "%g" /volumes/media)
-CONFIG_ID=$(stat -c "%g" /volumes/config)
-COMPLETED_ID=$(stat -c "%g" /volumes/completed)
-
-# Function to ensure nobody belongs to a GID. Creates 
+# Function to ensure user 'nobody' belongs to a GID. Creates 
 # group if needed
 GID_COUNTER=0
 function add_to_group {
@@ -44,9 +39,14 @@ function add_to_group {
   fi
 }
 
-GIDS=$(printf "$MEDIA_ID\n$CONFIG_ID\n$COMPLETED_ID\n" | sort | uniq)
+echo "Getting group ID's of /volumes"
+MEDIA_ID=$(stat -c "%g" /volumes/media)
+CONFIG_ID=$(stat -c "%g" /volumes/config)
+COMPLETED_ID=$(stat -c "%g" /volumes/completed)
+
+GIDS=$(printf '%s\n%s\n%s\n' $MEDIA_ID $CONFIG_ID $COMPLETED_ID | sort | uniq)
 echo "Adding nobody to host GIDs: $(echo $GIDS | tr '\n' ',')"
-printf $GIDS | while read line ; do add_to_group $line ; done
+printf '%s\n' $GIDS | while read line ; do add_to_group $line ; done
 
 echo "starting sonarr as nobody"
 chsh -s /bin/sh nobody
